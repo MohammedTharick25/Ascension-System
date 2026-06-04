@@ -5,7 +5,11 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static("public"));
+app.use(express.static(__dirname));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
 app.post("/api/generate", async (req, res) => {
   const { prompt } = req.body;
